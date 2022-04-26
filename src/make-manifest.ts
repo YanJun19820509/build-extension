@@ -51,9 +51,11 @@ function makeManifest(buildPath: string, remoteUrl: string, version: string) {
         searchPaths: []
     };
 
+    var aa = '';
+    if (remoteUrl[remoteUrl.length - 1] != '/') aa = '/';
     manifest.packageUrl = remoteUrl;
-    manifest.remoteManifestUrl = path.join(remoteUrl, 'assets/project.manifest');
-    manifest.remoteVersionUrl = path.join(remoteUrl, 'assets/version.manifest');
+    manifest.remoteManifestUrl = remoteUrl + aa + 'assets/project.manifest';
+    manifest.remoteVersionUrl = remoteUrl + aa + 'assets/version.manifest';
     var src = path.join(buildPath, 'assets');
 
     // Iterate assets and src folder
