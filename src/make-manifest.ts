@@ -5,9 +5,7 @@ var crypto = require('crypto');
 
 export function createManifestFile(args: any) {
     var now = new Date();
-    var _1 = now.toLocaleDateString().replace(/\//g, '');
-    var _2 = `${now.getHours()}${now.getMinutes()}${now.getSeconds()}`;
-    var version = args.baseVersion + `.${_1}${_2}`;
+    var version = args.baseVersion + `.${now.getTime()}`;
     var root = Editor.Project.path + '/';
     var buildPathRoot = args.buildPath.replace('project://', root);
     if (args.platform == 'web-mobile' || args.platform == 'web-desktop') {
