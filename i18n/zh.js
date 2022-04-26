@@ -1,0 +1,1 @@
+"use strict";module.exports={description:"项目构建扩展"};
