@@ -22,9 +22,7 @@ export function createManifestFile(args: any) {
             throw err;
         }
 
-        // var newStr = ext + "('" + newVersion + "');\n";
         var newStr = ext + "\n";
-        newStr += "localStorage.setItem('version', '" + version + "');\n";
         newStr += "localStorage.setItem('packageName', '" + args.packageName + "');\n";
         newStr += data;
         writeFile(url, newStr, function (error) {
