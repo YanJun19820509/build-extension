@@ -41,6 +41,17 @@ export const configs: BuildPlugin.Configs = {
                 verifyRules: [],
                 type: 'object'
             },
+            compress: {
+                label: 'Compress Images:',
+                render: {
+                    ui: 'ui-checkbox',
+                    attributes: {
+                        value: false
+                    },
+                },
+                verifyRules: [],
+                type: 'object'
+            },
         },
         verifyRuleMap: {
             versionFormatCheck: {
@@ -96,6 +107,17 @@ export const configs: BuildPlugin.Configs = {
                 verifyRules: [],
                 type: 'object'
             },
+            compress: {
+                label: 'Compress Images:',
+                render: {
+                    ui: 'ui-checkbox',
+                    attributes: {
+                        value: false
+                    },
+                },
+                verifyRules: [],
+                type: 'object'
+            },
         },
         verifyRuleMap: {
             versionFormatCheck: {
@@ -142,7 +164,17 @@ export const configs: BuildPlugin.Configs = {
             makeZip: {
                 label: 'Make zip:',
                 render: {
-                    // 请点击编辑器菜单栏中的“开发者 -> UI 组件”，查看所有支持的 UI 组件列表。
+                    ui: 'ui-checkbox',
+                    attributes: {
+                        value: false
+                    },
+                },
+                verifyRules: [],
+                type: 'object'
+            },
+            compress: {
+                label: 'Compress Images:',
+                render: {
                     ui: 'ui-checkbox',
                     attributes: {
                         value: false

@@ -1,5 +1,5 @@
 //@ts-ignore
-import packageJSON from '../package.json';
+import { compressImages } from "./compress";
 import { createManifestFile } from "./make-manifest";
 /**
  * @en 
@@ -8,7 +8,11 @@ import { createManifestFile } from "./make-manifest";
 export const methods: { [key: string]: (...any: any) => any } = {
     createHotupdateAssets(v) {
         // console.log(v);
-        createManifestFile(JSON.parse(v));
+        var args = JSON.parse(v);
+        if (args.compress) {
+            compressImages(args);
+        }
+        createManifestFile(args);
     },
 };
 
