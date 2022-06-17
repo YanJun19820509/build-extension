@@ -1,3 +1,4 @@
+import { execFileSync } from 'child_process';
 import { createWriteStream, mkdirSync, readdirSync, readFile, readFileSync, statSync, writeFile } from 'fs';
 import path from 'path';
 import { getVersion } from './getSvnRevision';
@@ -35,6 +36,7 @@ export function createManifestFile(args: any) {
     });
     makeManifest(buildPath, args.hotUpdataServerUrl, version);
     args.makeZip && makeZipper(buildPath, args.packageName, version);
+    if (args.buildApk) buildApk(buildPath, args.flavors.split(',')[args.buildFlaverIdx], args.buildDebug);
 }
 
 function makeManifest(buildPath: string, remoteUrl: string, version: string) {
@@ -169,4 +171,14 @@ function makeWebZipper(buildpath: string, platform: string, packageName: string,
     archive.pipe(output);
     archive.directory(src, packageName + '_' + ver);
     archive.finalize();
+}
+
+function buildApk(buildPath: string, flavor: string, isDebug: boolean) {
+    let a = `assemble${flavor}${isDebug ? 'Debug' : 'Release'}`;
+    console.log(`开始构建：${a}`)
+    let b = buildPath.split(':')[0] + ':';
+    let proj = path.join(buildPath, 'proj');
+    var bat = path.join(Editor.Package.getPath('build-extension'), 'build.bat');
+    execFileSync(bat, [b, proj, a], { encoding: 'utf8' });
+    console.log(`构建完成`)
 }

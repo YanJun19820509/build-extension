@@ -52,6 +52,51 @@ export const configs: BuildPlugin.Configs = {
                 verifyRules: [],
                 type: 'object'
             },
+            buildApk: {
+                label: 'Build Apk:',
+                render: {
+                    ui: 'ui-checkbox',
+                    attributes: {
+                        value: true,
+                    },
+                },
+                verifyRules: [],
+                type: 'object'
+            },
+            flavors: {
+                label: 'Product Flavors:',
+                render: {
+                    ui: 'ui-input',
+                    attributes: {
+                        placeholder: '输入渠道名，用[,]分割',
+                    },
+                },
+                verifyRules: [],
+                type: 'object'
+            },
+            buildFlaverIdx: {
+                label: 'Build Flavor Index:',
+                render: {
+                    ui: 'ui-input',
+                    attributes: {
+                        placeholder: '输入需要构建的渠道名下标',
+                    },
+                },
+                verifyRules: [],
+                type: 'object'
+            },
+            buildDebug: {
+                label: 'Build For Debug:',
+                render: {
+                    ui: 'ui-checkbox',
+                    attributes: {
+                        value: true,
+                        tooltip: '勾选打debug包，否则打release包'
+                    },
+                },
+                verifyRules: [],
+                type: 'object'
+            },
         },
         verifyRuleMap: {
             versionFormatCheck: {

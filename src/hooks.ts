@@ -14,7 +14,11 @@ export function onAfterBuild(options: IBuildTaskOption, result: any): Promise<vo
         hotUpdataServerUrl: be.remoteAddress,
         baseVersion: be.baseVersion,
         makeZip: be.makeZip,
-        compress: be.compress
+        compress: be.compress,
+        flavors: be.flavors,
+        buildFlaverIdx: be.buildFlaverIdx,
+        buildDebug: be.buildDebug,
+        buildApk: be.buildApk
     };
     Editor.Message.send('build-extension', 'createManifestFile', JSON.stringify(a));
     // createManifestFile(a);
