@@ -1,0 +1,1 @@
+svn info -r HEAD %1

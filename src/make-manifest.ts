@@ -1,11 +1,12 @@
 import { createWriteStream, mkdirSync, readdirSync, readFile, readFileSync, statSync, writeFile } from 'fs';
 import path from 'path';
+import { getVersion } from './getSvnRevision';
 
 var crypto = require('crypto');
 
 export function createManifestFile(args: any) {
-    var now = new Date();
-    var version = args.baseVersion + `.${now.getTime()}`;
+    var svnRevision = getVersion();
+    var version = args.baseVersion + '.' + svnRevision;
     var root = Editor.Project.path + '/';
     var buildPathRoot = args.buildPath.replace('project://', root);
     if (args.platform == 'web-mobile' || args.platform == 'web-desktop') {
