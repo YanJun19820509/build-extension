@@ -97,6 +97,17 @@ export const configs: BuildPlugin.Configs = {
                 verifyRules: [],
                 type: 'object'
             },
+            output: {
+                label: 'App/Apk Output Folder:',
+                render: {
+                    ui: 'ui-input',
+                    attributes: {
+                        placeholder: '输入原生包导出目录',
+                    },
+                },
+                verifyRules: [],
+                type: 'object'
+            },
         },
         verifyRuleMap: {
             versionFormatCheck: {

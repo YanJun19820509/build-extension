@@ -36,7 +36,7 @@ export function createManifestFile(args: any) {
     });
     makeManifest(buildPath, args.hotUpdataServerUrl, version);
     args.makeZip && makeZipper(buildPath, args.packageName, version);
-    if (args.buildApk) buildApk(buildPath, args.flavors.split(',')[args.buildFlaverIdx], args.buildDebug);
+    if (args.buildApk) buildApk(buildPath, args.output, args.flavors.split(',')[args.buildFlaverIdx], args.buildDebug);
 }
 
 function makeManifest(buildPath: string, remoteUrl: string, version: string) {
@@ -173,12 +173,14 @@ function makeWebZipper(buildpath: string, platform: string, packageName: string,
     archive.finalize();
 }
 
-function buildApk(buildPath: string, flavor: string, isDebug: boolean) {
+function buildApk(buildPath: string, output: string, flavor: string, isDebug: boolean) {
     let a = `assemble${flavor}${isDebug ? 'Debug' : 'Release'}`;
     console.log(`开始构建：${a}`)
     let b = buildPath.split(':')[0] + ':';
     let proj = path.join(buildPath, 'proj');
     var bat = path.join(Editor.Package.getPath('build-extension'), 'build.bat');
     execFileSync(bat, [b, proj, a], { encoding: 'utf8' });
-    console.log(`构建完成`)
+    console.log(`构建完成`);
+    var exec = require('child_process').exec;
+    exec(`explorer.exe /select,"${output}"`);
 }

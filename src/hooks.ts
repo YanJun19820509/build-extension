@@ -18,7 +18,8 @@ export function onAfterBuild(options: IBuildTaskOption, result: any): Promise<vo
         flavors: be.flavors,
         buildFlaverIdx: be.buildFlaverIdx,
         buildDebug: be.buildDebug,
-        buildApk: be.buildApk
+        buildApk: be.buildApk,
+        output: be.output
     };
     Editor.Message.send('build-extension', 'createManifestFile', JSON.stringify(a));
     // createManifestFile(a);
