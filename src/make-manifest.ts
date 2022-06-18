@@ -7,7 +7,9 @@ var crypto = require('crypto');
 
 export function createManifestFile(args: any) {
     var svnRevision = getVersion();
-    var version = args.baseVersion + '.' + svnRevision;
+    let now = new Date();
+    let a = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+    var version = args.baseVersion + '.' + svnRevision + '.' + a;
     var root = Editor.Project.path + '/';
     var buildPathRoot = args.buildPath.replace('project://', root);
     if (args.platform == 'web-mobile' || args.platform == 'web-desktop') {
@@ -35,8 +37,9 @@ export function createManifestFile(args: any) {
         });
     });
     makeManifest(buildPath, args.hotUpdataServerUrl, version);
-    args.makeZip && makeZipper(buildPath, args.packageName, version);
-    if (args.buildApk) buildApk(buildPath, args.output, args.flavors.split(',')[args.buildFlaverIdx], args.buildDebug);
+    args.makeZip && makeZipper(buildPath, args.packageName, version, () => {
+        if (args.buildApk) buildApk(buildPath, args.output, args.flavors.split(',')[args.buildFlaverIdx], args.buildDebug);
+    });
 }
 
 function makeManifest(buildPath: string, remoteUrl: string, version: string) {
@@ -121,7 +124,7 @@ function mkdir(path: string) {
     }
 }
 
-function makeZipper(buildpath: string, name: string, ver: string) {
+function makeZipper(buildpath: string, name: string, ver: string, cb: () => void) {
     console.log('热更文件打包开始');
 
     var archiver = require('archiver');
@@ -142,6 +145,7 @@ function makeZipper(buildpath: string, name: string, ver: string) {
         console.log('热更文件打包完成：' + zipPath);
         var exec = require('child_process').exec;
         exec(`explorer.exe /select,"${zipPath}"`);
+        cb();
     });
     archive.pipe(output);
     archive.directory(res, 'assets');
